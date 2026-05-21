@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
+import Particles, { ParticlesProvider } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
+import type { Engine } from "@tsparticles/engine";
+
+const init = async (engine: Engine) => {
+  await loadSlim(engine);
+};
 
 export function ParticlesBg() {
-  const [init, setInit] = useState(false);
-
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => setInit(true));
-  }, []);
-
-  if (!init) return null;
-
   return (
+    <ParticlesProvider init={init}>
     <Particles
       id="tsparticles"
       className="absolute inset-0 -z-10"
@@ -53,5 +48,6 @@ export function ParticlesBg() {
         detectRetina: true,
       }}
     />
+    </ParticlesProvider>
   );
 }
