@@ -1,0 +1,57 @@
+import { useEffect, useState } from "react";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+
+export function ParticlesBg() {
+  const [init, setInit] = useState(false);
+
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => setInit(true));
+  }, []);
+
+  if (!init) return null;
+
+  return (
+    <Particles
+      id="tsparticles"
+      className="absolute inset-0 -z-10"
+      options={{
+        fullScreen: { enable: false },
+        background: { color: { value: "transparent" } },
+        fpsLimit: 60,
+        interactivity: {
+          events: {
+            onHover: { enable: true, mode: "grab" },
+            onClick: { enable: true, mode: "push" },
+          },
+          modes: {
+            grab: { distance: 160, links: { opacity: 0.8 } },
+            push: { quantity: 3 },
+          },
+        },
+        particles: {
+          color: { value: ["#00F5FF", "#7B61FF"] },
+          links: {
+            color: "#00F5FF",
+            distance: 140,
+            enable: true,
+            opacity: 0.25,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 0.8,
+            outModes: { default: "out" },
+          },
+          number: { density: { enable: true, width: 800 }, value: 70 },
+          opacity: { value: 0.6 },
+          shape: { type: "circle" },
+          size: { value: { min: 1, max: 3 } },
+        },
+        detectRetina: true,
+      }}
+    />
+  );
+}
