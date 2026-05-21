@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { Github, ExternalLink } from "lucide-react";
 import { ParticlesBg } from "./ParticlesBg";
 
 /* ============================== HERO ============================== */
@@ -343,18 +344,24 @@ const PROJECTS = [
       "ML system to identify fake Reddit profiles using NLP and behavioral analysis. TF-IDF feature extraction with Logistic Regression, Random Forest, and Gradient Boosting. Flask backend with a web UI for real-time prediction.",
     stack: ["Python", "NLP", "TF-IDF", "Flask", "Scikit-learn"],
     featured: true,
+    github: "https://github.com/dhanushbabu/fake-profile-detection-reddit",
+    liveDemo: "https://fake-profile-detection.onrender.com",
   },
   {
     title: "Coming Soon",
     tag: "Web · Full Stack",
     description: "An interactive dashboard project. Stay tuned — currently shipping.",
     stack: ["React", "Tailwind", "Node"],
+    github: null,
+    liveDemo: null,
   },
   {
     title: "Coming Soon",
     tag: "IoT · Data",
     description: "Sensor-driven analytics build. Hardware meets real-time visualisation.",
     stack: ["ESP32", "Python", "MQTT"],
+    github: null,
+    liveDemo: null,
   },
 ];
 
@@ -396,12 +403,31 @@ export function Projects() {
                       ))}
                     </div>
                     <div className="mt-7 flex items-center gap-3">
-                      <a href="#" className="inline-flex items-center gap-1.5 rounded-full bg-primary/15 px-4 py-2 text-xs text-primary transition-colors hover:bg-primary/25">
-                        GitHub →
-                      </a>
-                      <a href="#" className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-2 text-xs text-foreground/80 transition-colors hover:border-white/30">
-                        Live Demo
-                      </a>
+                      {p.github ? (
+                        <a
+                          href={p.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-full bg-primary/15 px-4 py-2 text-xs text-primary transition-colors hover:bg-primary/25"
+                        >
+                          <Github className="h-3.5 w-3.5" /> GitHub
+                        </a>
+                      ) : null}
+                      {p.liveDemo ? (
+                        <a
+                          href={p.liveDemo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-2 text-xs text-foreground/80 transition-colors hover:border-white/30 hover:bg-white/5"
+                        >
+                          <ExternalLink className="h-3.5 w-3.5" /> Live Demo
+                        </a>
+                      ) : null}
+                      {!p.github && !p.liveDemo && (
+                        <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-foreground/40">
+                          Coming Soon
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
