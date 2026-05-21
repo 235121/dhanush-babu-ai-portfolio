@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { Github, ExternalLink } from "lucide-react";
 import { ParticlesBg } from "./ParticlesBg";
 
 /* ============================== HERO ============================== */
